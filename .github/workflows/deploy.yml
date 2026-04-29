@@ -1,0 +1,71 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Prepare dist
+        run: |
+          mkdir -p dist
+          python -m pip install --upgrade pip
+          pip install markdown
+          python - << 'PY'
+          from pathlib import Path
+          import markdown
+
+          md_text = Path("README.md").read_text(encoding="utf-8")
+          content = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
+          html = f"""<!doctype html>
+          <html lang=\"zh-CN\">
+          <head>
+            <meta charset=\"utf-8\" />
+            <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />
+            <title>SDU CS</title>
+            <style>
+              body {{
+                margin: 0;
+                background: linear-gradient(180deg, #f7f9fc 0%, #eef3f8 100%);
+                color: #11223a;
+                font: 16px/1.8 "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+              }}
+              main {{
+                max-width: 900px;
+                margin: 36px auto;
+                padding: 28px;
+                background: #ffffff;
+                border-radius: 14px;
+                box-shadow: 0 10px 30px rgba(0, 24, 57, 0.08);
+              }}
+              h1, h2, h3 {{ color: #0b3a67; }}
+              a {{ color: #0455a4; text-decoration: none; }}
+              a:hover {{ text-decoration: underline; }}
+              table {{ width: 100%; border-collapse: collapse; margin: 12px 0 20px; }}
+              th, td {{ border: 1px solid #d7e0ea; padding: 8px 10px; text-align: center; }}
+              th {{ background: #f1f6fb; }}
+              code {{ background: #f2f4f7; padding: 2px 5px; border-radius: 6px; }}
+              pre {{ background: #f2f4f7; padding: 12px; border-radius: 10px; overflow-x: auto; }}
+            </style>
+          </head>
+          <body>
+            <main>{content}</main>
+          </body>
+          </html>
+          """
+          Path("dist/index.html").write_text(html, encoding="utf-8")
+          PY
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}

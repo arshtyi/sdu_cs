@@ -28,7 +28,7 @@
 
 |项目|说明|
 |:-:|:-:|
-|[SDU-Lab-Report](https://github.com/arshtyi/SDU-Lab-Report)|山大最普通的实验报告模板|
+|[typst-sdu-os-slide](https://github.com/arshtyi/typst-sdu-os-slide)|使用Typst复刻操作系统课程幻灯片模板|
 |[Typst-Templates](https://github.com/arshtyi/Typst-Templates)|Typst 模板集合,包含大多数课程可能用到的模板|
 
 |课程|课件|小测题目|小测答案|作业题目|作业答案|实验题目|实验答案|考试题目|考试答案|复习提纲|说明|
@@ -46,7 +46,8 @@
 
 |项目|说明|
 |:-:|:-:|
-|[typst-sdu-os-slide](https://github.com/arshtyi/typst-sdu-os-slide)|使用Typst复刻操作系统课程幻灯片模板|
+|[typst-sdu-letter](https://github.com/arshtyi/typst-sdu-letter)|使用Typst复刻的山大信纸|
+|[SDU-Lab-Report](https://github.com/arshtyi/SDU-Lab-Report)|山大最普通的实验报告模板|
 |[LaTeX-Templates](https://github.com/arshtyi/LaTeX-Templates)|LaTeX 模板集合,包含大多数课程可能用到的模板|
 |[SDUOJ-Solutions](https://github.com/arshtyi/SDUOJ-Solutions)|SDUOJ 部分题解|
 
